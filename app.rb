@@ -1,5 +1,6 @@
 require 'yajl'
 require 'active_support'
+require 'faraday'
 
 module PapertrailInsightsWebhook
   class App < Sinatra::Base
