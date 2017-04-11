@@ -16,7 +16,7 @@ module PapertrailInsightsWebhook
         @insights.send_event('PapertrailAlerts', event)
       end
 
-      'ok'
+      204
     end
   end
 end
