@@ -1,5 +1,7 @@
 source :rubygems
 
+ruby '2.2.0'
+
 gem 'sinatra'
 gem 'yajl-ruby'
 gem 'activesupport', '~> 2.3', :require => 'active_support'
