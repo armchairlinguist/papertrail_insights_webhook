@@ -1,6 +1,5 @@
 require 'yajl'
 require 'active_support'
-require 'new_relic_insights'
 
 module PapertrailInsightsWebhook
   class App < Sinatra::Base
