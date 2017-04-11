@@ -1,25 +1,19 @@
 require 'yajl'
 require 'active_support'
-require 'prowly'
+require 'new_relic_insights'
 
-module PapertrailProwlWebhook
+module PapertrailInsightsWebhook
   class App < Sinatra::Base
     get '/' do
       "200\n"
     end
 
     post '/submit' do
-      payload = HashWithIndifferentAccess.new(Yajl::Parser.parse(params[:payload]))
+      @insights = NewRelicInsights.new ENV['NEWRELIC_ACCOUNT_ID'], ENV['INSIGHTS_API_KEY']
 
+      payload = HashWithIndifferentAccess.new(Yajl::Parser.parse(params[:payload]))
       payload[:events].each do |event|
-        Prowly.notify do |n|
-          n.apikey      = ENV['PROWL_API_KEY']
-          n.priority    = Prowly::Notification::Priority::NORMAL
-          n.application = 'Papertrail'
-          n.event       = event[:hostname]
-          n.description = event[:message]
-          n.url         = "#{payload[:saved_search][:html_search_url]}?center_on_id=#{event[:id]}"
-        end
+        @insights.send_event(PapertrailAlerts, event)
       end
 
       'ok'

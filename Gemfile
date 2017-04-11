@@ -2,12 +2,12 @@ source :rubygems
 
 gem 'sinatra'
 gem 'yajl-ruby'
-gem 'prowly'
 gem 'activesupport', '~> 2.3', :require => 'active_support'
+gem 'new_relic_insights'
+gem "iconv", "~> 1.0.3"
 
 gem 'thin'
 
 group :development do
-  gem 'heroku'
   gem 'foreman'
 end
