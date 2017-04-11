@@ -13,7 +13,7 @@ module PapertrailInsightsWebhook
 
       payload = HashWithIndifferentAccess.new(Yajl::Parser.parse(params[:payload]))
       payload[:events].each do |event|
-        @insights.send_event(PapertrailAlerts, event)
+        @insights.send_event('PapertrailAlerts', event)
       end
 
       'ok'
